@@ -1,0 +1,252 @@
+*{
+  line-height: normal;
+}
+
+#title{
+  font-size: 6vw;
+  font-family: 'Bree Serif', serif;
+  color: #0098db;
+  margin-left: 20px;
+}
+
+* {
+  font-family: "Calibri", Helvetica, Arial, Verdana, Tahoma, sans-serif;
+}
+
+.tweet {
+  /*border: 1px solid black;*/
+  width: 25em;
+  padding: 2em;
+  margin-top: 2em;
+}
+
+.sentiment {
+  border: 2px solid black;
+  border-color: #0098db;
+  border-radius: 25px;
+  padding: 2em;
+}
+
+#map, #graphs{
+  height: 65vh;
+}
+
+#base, #graphs{
+  align-items: center;
+  height: 65vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-color: #0098db white;
+}
+
+
+/*//////////////////////////////////////
+PODIUM
+///////////////////////////*/
+
+.titlediv{
+  font-size: 40px;
+  text-align: center;
+  color: red;
+  font-family: 'Staatliches', cursive !important;
+}
+
+.leaders{
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+}
+
+.place-3{
+  fill:#90EE90;
+}
+.place-2{
+  fill:#0098db;
+}
+.place-1{
+  fill:red;
+}
+
+
+
+/*** LIST ***/
+.podium-rank {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+    max-width: 80em;
+    float: left;
+    padding: 1em;
+    width: 100%;
+}
+
+
+/* Listing */
+ol.podium-rank > li {
+    display: flex;
+    flex-basis: 0;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+ol.podium-rank > li:nth-of-type(odd) {
+    order: 0;
+}
+
+ol.podium-rank > li:nth-of-type(2) {
+    order: -1;
+}
+
+
+ol.podium-rank > li * {
+    transition: all 0.5s ease 0s;
+}
+
+ol.podium-rank > li > * {
+    padding: 1em;
+    width: 100%;
+}
+
+
+/* Image */
+ol.podium-rank > li .image {
+    position: absolute;
+    height: 0;
+    padding-bottom: calc((100% / 4) * 3);
+    position: relative;
+    width: 100%;
+}
+
+ol.podium-rank:not(:hover) > li:not(:first-of-type) .image,
+ol.podium-rank:hover > li:not(:hover) .image {
+    /* Blur not compatible in IE11 */
+    filter: blur(0.375em);
+}
+
+ol.podium-rank:not(:hover) > li:nth-of-type(2) .image {
+    /* Blur not compatible in IE11 */
+    filter: blur(0.125em);
+}
+
+ol.podium-rank:not(:hover) > li:nth-of-type(3) .image {
+    /* Blur not compatible in IE11 */
+    filter: blur(0.25em);
+}
+
+ol.podium-rank > li .image > * {
+    height: auto;
+    left: 50%;
+    max-height: 30%;
+    max-width: 30%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+}
+
+ol.podium-rank:not(:hover) > li:first-of-type .image > * {
+    max-height: 75%;
+    max-width: 75%;
+}
+
+ol.podium-rank:not(:hover) > li:nth-of-type(2) .image > * {
+    max-height: 60%;
+    max-width: 60%;
+}
+
+ol.podium-rank:not(:hover) > li:nth-of-type(3) .image > * {
+    max-height: 45%;
+    max-width: 45%;
+}
+
+ol.podium-rank > li:hover .image > * {
+    max-height: 90%;
+    max-width: 90%;
+}
+
+/* Content */
+ol.podium-rank > li:not(:hover) .content {
+    opacity: 0;
+    padding-top: 1em;
+}
+
+ol.podium-rank > li .content {
+  position:absolute;
+  width: 50%;
+  font-family: 'Staatliches', cursive !important;
+}
+
+ol.podium-rank > li:hover .content {
+    padding-bottom: 1em;
+    color: black;
+}
+
+ol.podium-rank > li .content * {
+    margin: 0.25em 0 0 0;
+}
+
+
+
+/*** MEDIA QUERIES ***/
+@media only screen and ( max-width: 50em ) {
+
+    ol.podium-rank {
+        flex-direction: column;
+    }
+
+    ol.podium-rank > li {
+        display: block;
+        order: 1!important;
+    }
+
+}
+
+/*///////////////////////////
+POLL
+//////////////////////////*/
+
+.correct-poll{
+  font-size: 32px;
+  text-align: center;
+  color: green;
+  font-family: 'Staatliches', cursive !important;
+
+}
+
+.correct-poll-bad{
+  font-size: 32px;
+  text-align: center;
+  color: red;
+  font-family: 'Staatliches', cursive !important;
+
+}
+
+.correct-poll-neutral{
+  font-size: 32px;
+  text-align: center;
+  color: grey;
+  font-family: 'Staatliches', cursive !important;
+
+}
+
+
+@media (max-width: 767px) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 767px) {    #map, #graphs, #base{     width: 100%;     min-width: 100%;   } }

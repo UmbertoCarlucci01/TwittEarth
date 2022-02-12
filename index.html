@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+  <link rel="icon" href="favicon.ico?" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link href="css/main.css" rel="stylesheet" media="all">
+  <link href="css/searchbar.css" rel="stylesheet" media="all">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js" charset="utf-8">
+  </script>
+  <script src="https://code.highcharts.com/highcharts.js">
+  </script>
+  <script src="https://code.highcharts.com/modules/wordcloud.js">
+  </script>
+  <script src="https://code.highcharts.com/modules/exporting.js">
+  </script>
+  <script src="https://code.highcharts.com/modules/export-data.js">
+  </script>
+  <script src="https://code.highcharts.com/modules/accessibility.js">
+  </script>
+
+  <title>TwittEarth</title>
+</head>
+
+<body class="overflow-hidden container-fluid">
+  <div class="row d-flex p-2 justify-content-center">
+    <div class="aParent">
+      <div>
+        <img src="twittearthicon.png" height="120" width="100" style="position:relative; top:1vw" alt="icon">
+      </div>
+      <div id="title">
+        TwittEarth
+      </div>
+    </div>
+    <div id="streamdiv">
+    </div>
+    <!--SEARCHBAR-->
+    <div class="searchbar">
+      <form class="form" id="simpleform" action="javascript:userTimeline()" novalidate>
+
+        <div class="input-group input--large">
+          <label class="label" id="searchhead">Insert user name</label>
+          <input id="searchbar" class="input--style-1" type="text" placeholder="Nome utente..." name="searchbar"
+            required="true">
+        </div>
+        <!-- SEARCH BY-->
+        <div class="input-group input--medium dropdown">
+          <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+            <label class="label">Search by</label>
+            <input id="searchby" class="input--style-1" type="text" name="checkin" placeholder="User" id="input-start">
+          </button>
+
+          <div class="dropdown-menu">
+            <div class="dropdown-item">
+              <input type="radio" id="radio_userTimeline" class="dropdown-box" name="search" value="byUser"
+                checked="checked">
+              <label for="radio_userTimeline" class="dropdown-label">Search User Timeline</label><br>
+            </div>
+            <div class="dropdown-item">
+              <input type="radio" id="radio_textTweets" class="dropdown-box" name="search" value="byText">
+              <label for="radio_textTweets" class="dropdown-label">Search Tweets with given Text</label><br>
+            </div>
+            <div class="dropdown-item">
+              <input type="radio" id="radio_hashtagTweets" class="dropdown-box" name="search" value="byHashtag">
+              <label for="radio_hashtagTweets" class="dropdown-label">Search Tweets with given Hashtag</label><br>
+            </div>
+            <div class="dropdown-item">
+              <input type="radio" id="radio_location" class="dropdown-box" name="search" value="byLocation">
+              <label for="radio_location" class="dropdown-label">Search Tweets of people living in a given
+                Location</label><br>
+            </div>
+            <div class="dropdown-item">
+              <input type="radio" id="radio_contest" class="dropdown-box" name="search" value="byContest">
+              <label for="radio_contest" class="dropdown-label">Search Tweets of Literary Contest</label><br>
+            </div>
+            <div class="dropdown-item">
+              <input type="radio" id="radio_trivia" class="dropdown-box" name="search" value="byTrivia">
+              <label for="radio_trivia" class="dropdown-label">Search Tweets of Trivia Contest</label><br>
+            </div>
+          </div>
+
+        </div>
+        <!-- FILTERS-->
+        <div class="input-group input--medium dropdown">
+          <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+            <label class="label">Filters</label>
+            <input class="input--style-1" type="text" name="checkout" placeholder="0" id="input-end">
+          </button>
+
+          <div class="dropdown-menu">
+            <div class="dropdown-item">
+              <input type="checkbox" class="dropdown-box" id="check_geo" name="geocheck" value="geocheck">
+              <label for="check_geo" class="dropdown-label">Show only geolocalized Tweets</label>
+            </div>
+            <div class="dropdown-item">
+              <input type="checkbox" class="dropdown-box" id="check_sent" name="sentcheck" value="sentcheck" disabled>
+              <label for="check_sent" class="dropdown-label">Show sentiment for word searching tweets</label><br>
+            </div>
+            <div class="dropdown-item">
+              <label for="notcontain" class="dropdown-label">Escludi Tweet con le date keyword (comma separated)</label>
+              <input type="text" class="dropdown-item" id="notcontain" placeholder="Parole da non contenere..."
+                name="notcontain" required="false" disabled>
+            </div>
+            <div class="dropdown-item">
+              <input type="checkbox" class="dropdown-box" id="containmedia" name="mediacheck" value="mediacontain"
+                disabled>
+              <label for="containmedia" class="dropdown-label">Escludi tweet contenenti un'immagine o un video</label>
+            </div>
+            <div class="dropdown-item">
+              <input type="checkbox" class="dropdown-box" id="verified" name="onlyverified" value="verified" disabled>
+              <label for="verified" class="dropdown-label">Ottieni solo tweet di account verificati</label>
+            </div>
+          </div>
+        </div>
+        <div class="input-group input--medium">
+          <label class="label" id="numtweetslabel" for="numtweets">Number:</label>
+          <div class="input-group-icon js-number-input">
+            <div class="icon-con">
+              <button type="button" class="plus" id="plusbutton">+</button>
+              <button type="button" class="minus" id="minusbutton">-</button>
+            </div>
+
+            <input id="numtweets" class="input--style-1" type="number" value="25" name="numtweets" min="5" max="100">
+          </div>
+        </div>
+        <button class="btn-submit" type="submit" id="searchbutton">search</button>
+        <a class="btn-submit my_a" href="./stream.html">stream</a>
+      </form>
+    </div>
+
+  </div>
+  <div class="row container-fluid">
+    <div class="col" id="map">
+    </div>
+    <div class="col" id="base">
+    </div>
+    <div class="col" id="graphs">
+
+    </div>
+  </div>
+
+</body>
+
+<script src="home.js"></script>
+
+</html>
